@@ -173,8 +173,8 @@ Un dictionario consiste de pares de forma *clave*`:`*valor* scribite inter paren
 
 ```
 nums = { 
-  'un': 1, 'duo': 2,   'tres': 3, 'quatro': 4, 'cinque': 5, 
-  'sex':6, 'septe': 7, 'octo': 8, 'nove': 9,   'dece': 10 }
+  'un': 1,  'duo': 2,   'tres': 3, 'quatro': 4, 'cinque': 5, 
+  'sex': 6, 'septe': 7, 'octo': 8, 'nove': 9,   'dece': 10 }
 ```
 
 Nos trova le valor per su clave.
@@ -242,8 +242,8 @@ Nos nunc es preste a scriber nostre prime programma graphic. Pro isto nos usa le
 from tkinter import *
 
 root = Tk ()
-w = Label (root, text="Salute Mundo!")
-w.pack ()
+label1 = Label (root, text="Salute Mundo!")
+label1.pack ()
 root.mainloop ()
 ```
 

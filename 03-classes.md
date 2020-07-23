@@ -1,14 +1,6 @@
 # Classes
 
-In iste capitulo nos apprende terminos de objectos.
-
-Un *classe* es un description del characteristicas de un o de plure objectos. Cata objecto create a partir de iste classe es un *instantia* del classe in question.
-
-Un *methodo* es un suite de instructiones que manipula le characteristicas e le stato de un objecto.
-
-Un *attributo* es un characteristica proprie a un objecto donate.
-
-Le *stato* de un objecto es su forma a un instante donate, como describite per le valores del ensemble de su proprietates.
+*Classes* da nos un instrumento a unir le datos e le functionalitate. Quando nos crea un nove classe, nos crea un nove *typo* de objecto, e nos pote crear nove *instantias* de iste typo. Cata instantia de un classe pote haber *attributos*, id es, characteristicas proprie a un objecto, que mantene le *stato* del objecto. Instantias de classe pote anque haber *methodos* pro modificar le stato del objecto.
 
 ## Le classe minimal
 
@@ -156,7 +148,7 @@ Le modulo `cairo` ha le functiones a pinger rectangulos, a eliger un color, e a 
 ```
 w_pic, h_pic = 170,130
 w,h = 160,120
-filename = "armature-3.pdf"
+filename = "armature-1.pdf"
 surface = cairo.PDFSurface (filename, w_pic, h_pic)
 ct = cairo.Context (surface)
 
@@ -181,8 +173,6 @@ def draw_polygon (ps):
   for t in ps[1:]:
     ct.line_to (t.x,t.y)
   ct.close_path ()
-  ct.set_source_rgb (1.00, 0.50, 0.00)
-  ct.fill ()
 ```
 
 Nos nunc pinge le pictura (figura \ref{pic-diagonal}):
@@ -191,23 +181,37 @@ Nos nunc pinge le pictura (figura \ref{pic-diagonal}):
 x1,y1 = 5,5
 x2,y2 = x1 + w, y1 + h
 
-ps = [Point (a,b) for (a,b) in [(x1,y1),(x2,y1),(x2,y2),(x1,y1)]]
+pairs1 = [(x1,y1),(x2,y1),(x2,y2),(x1,y2)]
+ps = [Point (a,b) for (a,b) in pairs1]
 
 draw_line (Line (ps[0],ps[2]))
 draw_rect (ps[0],ps[2])
 
-ct.set_source_rgb(0.00, 0.00, 0.00)
-ct.set_line_width(1.0)
-ct.stroke()
+ct.set_source_rgb (0.00, 0.00, 0.00)
+ct.set_line_width (1.0)
+ct.stroke ()
 ```
 
-\begin{figure}[H]
+\begin{figure}[]
 \begin{center}
 \includegraphics{figures/armature-2.pdf}
 \caption{Pictura con un rectangulo e un diagonal.}
 \label{pic-diagonal}
 \end{center}
 \end{figure}
+
+## Modulo `subprocess`
+
+Nos pote monstrar le pictura per un visualisator externe. Hic nos usa le programma `mupdf`. Le modulo `subprocess` ha function `Popen` a initiar un processo externe.
+
+```
+import subprocess
+
+filename = "armature-1.pdf"
+subprocess.Popen (["mupdf " + filename],shell=True)
+```
+
+
 
 ## Intersection de duo lineas
 
@@ -270,7 +274,7 @@ for p in ps + [c1]:
   draw_point (p)
 ```
 
-\begin{figure}[H]
+\begin{figure}[]
 \begin{center}
 \includegraphics{figures/armature-4.pdf}
 \caption{Diagonales de un rectangulo e punctos de intersection.}
@@ -282,14 +286,14 @@ for p in ps + [c1]:
 
 ## Operator `+` inter duo objectos
 
-Similarmente que nos definiva methodo `__repr__` a un objecto, nos pote definir le operator `+` a adder duo objectos. Le methodo a definir es `__add__`. In `a + b` le prime operando `a` a adder deveni le argumento `self`. Le secunde operando `b` deveni le argumento secunde: `__add__(self, b)`. 
+Similarmente que nos definiva methodo `__repr__` a un objecto, nos pote definir le operator `+` a adder duo objectos. Le methodo a definir es `__add__`. In `a + b` le prime operando `a` a adder deveni le argumento `self`. Le secunde operando `b` deveni le argumento secunde: `__add__ (self, b)`. 
 
 Hic nos defini addition inter duo punctos, id es, inter duo objectos de classe `Point`:
 
 ```
 class Point:
   ...
-  def __add__(self, p2):
+  def __add__ (self, p2):
     return Point (self.x + p2.x, self.y + p2.y)
   ...
 ```
@@ -319,13 +323,14 @@ Le function `enumerate` es un generator que numera un sequentia:
 [(0, 'e'), (1, 'a'), (2, 'i'), (3, 'o'), (4, 'u')]
 ```
 
-Usante un numeration, nos trova le indices de un lista, e nos pote facer calculationes per illos. Per exemplo, un circlo al transverso de indices es
+Usante un numeration, nos trova le indices de un lista, e nos pote facer calculationes per illos. Per exemplo, un circulo al transverso de indices de lista `v = "ABCD"` es
 
 ```
-cs = [center (ps[i],ps[(i+1)%len(ps)]) for i,e in enumerate (ps)]
+> [(v [i],v [(i+1) % len (v)]) for i,e in enumerate (v)]
+[('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'A')
 ```
 
-Si le longor de lista `ps` es 6, le function `enumerate` da al variabile `i` le valores 0...5. Nunc quando `i = 5` le indice `(i+1)` es $5+1=6$ e $6 \;\mathrm{mod}\; 6 = 0$, e nos ha le ultime elemento `(ps[5],ps[0])` que completa le circulo.
+Le longor `len (v)` de lista `v` es 4, e le function `enumerate` da al variabile `i` le valores 0...3. Quando `i = 3` le indice `(i+1)` es $3+1=4$ e $4 \;\mathrm{mod}\; 4 = 0$. Le ultime elemento `(v [3], v [0])` nunc es `('D', 'A')` que completa le circulo.
 
 ## Insimules
 
@@ -348,7 +353,13 @@ Nos usa insimules quando nos vole que cata elemento del insimul es unic.
 
 ## Lineas inter cata puncto
 
-Le elementos de lista `cs` se trova inter elementos de lista `ps`. Nos prende un elemento de ambe lista, e extende le nove lista `ts` correspondente.
+Nos ha le centros inter punctos `ps` in lista `cs`: 
+
+```
+cs = [center (ps[i],ps[(i+1)%len(ps)]) for i,e in enumerate (ps)]
+```
+
+Nos prende un elemento per vice de ambe lista, e extende le nove lista `ts` correspondente.
 
 ```
 ts = []
@@ -356,7 +367,7 @@ for (a,b) in zip (ps,cs):
   ts.extend ([a,b])
 ```
 
-Quando nos trenchava le lineas per centros, alicun de illes veniva superflue:
+Quando nos trencha le lineas per centros, alicun de illes veni superflue:
 
 ```
 cutd = [(0,2),(2,4),(4,6),(0,6)]
@@ -381,7 +392,7 @@ for p in ts:
   draw_point (p)
 ```
 
-\begin{figure}[H]
+\begin{figure}[]
 \begin{center}
 \includegraphics{figures/armature-5.pdf}
 \caption{Lineas inter punctos.}
@@ -389,15 +400,4 @@ for p in ts:
 \end{center}
 \end{figure}
 
-
-## Modulo `subprocess`
-
-Nos pote monstrar le pictura per un visualisator externe. Hic nos usa le programma `mupdf`. Le modulo `subprocess` ha function `Popen` a initiar un processo externe.
-
-```
-import subprocess
-
-filename = "armature-4.pdf"
-subprocess.Popen (["mupdf " + filename],shell=True)
-```
 

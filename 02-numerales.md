@@ -358,7 +358,7 @@ Nos ha usate le componente `Label` a monstrar un texto in un fenestra. Nunc nos 
 
 Ambes ha un lista de proprietates que nos pote usar a cambiar le aspecto de elemento: su parente, color, bordo, largessa, typo de litteras, et cetera. Nos selige nulle bordo, texto nigre sur fundo blanc. Nomines de numerales es longe: nos selige largessa 60 characteres (figura \ref{entry-py}).
 
-\begin{figure}[H]
+\begin{figure}[]
 \begin{center}
 \includegraphics{figures/entry-py.png}
 \caption{Nostre programma "Numerales".}
@@ -371,40 +371,44 @@ Quando le fenestra appare, nos da le focus al componente `Entry`, post que nos p
 ```
 root = Tk ()
 root.title ('Numerales')
-sv = StringVar ()
-e = Entry (root, textvariable=sv, bd=0, width=60)
-w = Label (root, bg="white", fg="black", width=60)
-e.pack ()
-w.pack ()
-sv.trace ("w", lambda name, index, mode, sv=sv: callback (sv,w))
-e.focus_set ()
+svar = StringVar ()
+entry1 = Entry (root, textvariable=svar, bd=0, width=60)
+label1 = Label (root, bg="white", fg="black", width=60)
+entry1.pack ()
+label1.pack ()
+svar.trace ("w", lambda name, index, mode, sv=svar: callback 
+  (svar,label1))
+entry1.focus_set ()
 root.mainloop ()  
+ 
 ```
 
-Hic nos ha prestate un function `callback`, que responde al cambios de texto. Le texto es in variabile `sv` de classe `StringVar`. Nos lege le texto per methodo `get`.
+Hic nos ha prestate un function `callback`, que responde al cambios de texto. Le texto es in variabile `svar` de classe `StringVar`. Nos lege le texto per methodo `get`.
 
-Nos sape como colliger le numeros ex texto. Quando nos scribe solmente le numeros, nos ha validate le entrata.
+Nos valida le entrata per scriber solmente le numeros que nos collige ex texto.
 
 ```
 def callback (sv,w):
   s = sv.get ()
   n = "".join ([c for c in s if c in "1234567890"])
   sv.set (n)
-  numero = intA (n)
+  numero = int_def (n)
   if numero < 1_000_000: 
     result = numeral (numero)
   else: 
     result = 'troppo'
-  t = str (intA (n)) + ": " + result
+  t = str (int_def (n)) + ": " + result
   print (t)
   w ['text'] = t
 ```
 
-Nos ancora defini un function `intA` que sempre retorna un numero integre. Si le sequentia de characteres non es un numero, nos ha un error (plus exacte un `ValueError`). Tunc nos retorna un valor predefinite per clave `default`. Un tal error eveni in nostre caso quando le sequentia de characteres es vacue `''`.
+Le function `int` retorna le numero integre de un sequentia de characteres (per exemplo, le valor de `(int ("12"))` es 12). Si le contento de sequentia non es un numero, le resultato es un error (plus exacte un `ValueError`).
+
+Nos defini un function `int_def` que retorna un valor predefinite per clave `default` si le sequentia de characteres non es un numero. Un tal caso eveni in nostre programma quando le sequentia es vacue `''`.
 
 
 ```
-def intA (st,default=0):
+def int_def (st,default=0):
   try:
     result = int (st)
   except ValueError:
