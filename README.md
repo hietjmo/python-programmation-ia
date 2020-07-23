@@ -1,2 +1,2 @@
 # python-programmation-ia
-Libro de Python progarammation in Interlingua
+Libro de Python programmation in interlingua
