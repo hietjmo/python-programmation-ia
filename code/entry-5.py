@@ -86,7 +86,7 @@ entry1 = Entry (root, textvariable=svar, bd=0, width=60)
 label1 = Label (root, bg="white", fg="black", width=60)
 entry1.pack ()
 label1.pack ()
-svar.trace ("w", lambda name,index,mode,sv=svar: callback 
+svar.trace ("w", lambda name, index, mode, sv=svar: callback 
   (svar,label1))
 entry1.focus_set ()
 root.mainloop ()  
