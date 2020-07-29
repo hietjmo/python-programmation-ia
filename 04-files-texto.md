@@ -219,22 +219,19 @@ In le function nos ha un dictionario vacue `dict = {}`. Nos transversa le argume
 Nunc, per exemplo,
 
 ```
-> letter_frequency ('interlingua')
-{'i': 2, 'n': 2, 't': 1, 'e': 1, 'r': 1, 'l': 1, 'g': 1, 'u': 1, 
- 'a': 1}
+> letter_frequency ('inseniante')
+{'i': 2, 'n': 3, 's': 1, 'e': 2, 'a': 1, 't': 1}
 ```
 
 Ma pro calcular frequentias, le modulo `collection` ha un objecto `Counter`, que es plus efficace (circa a factor $3x$):
 
 ```
 > from collections import Counter
-> cnt = Counter ('interlingua')
+> cnt = Counter ('inseniante')
 > cnt
-Counter({'i': 2, 'n': 2, 't': 1, 'e': 1, 'r': 1, 'l': 1, 'g': 1, 
-  'u': 1, 'a': 1})
+Counter({'n': 3, 'i': 2, 'e': 2, 's': 1, 'a': 1, 't': 1})
 > cnt.most_common ()
-[('i', 2), ('n', 2), ('t', 1), ('e', 1), ('r', 1), ('l', 1), 
-  ('g', 1), ('u', 1), ('a', 1)]
+[('n', 3), ('i', 2), ('e', 2), ('s', 1), ('a', 1), ('t', 1)]
 ```
 
 Per exemplo, nos pote leger un integre file e calcular le frequentia de characteres per
