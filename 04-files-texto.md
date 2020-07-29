@@ -1,8 +1,8 @@
-# Cerca in files texto
+# Operationes a files texto
 
 In capitulo 2 nos preparava functiones a transformar numeros a sequentias de characteres. Nos definiva listas como `unes` e `deces`, e functiones como `milles`, `centos`, `unes1`, et cetera. Omnes le functiones nos salvava in file `numerales.py`.
 
-Nos nunc pote utilisar file `numerales.py` in le interprete de Python. Ex functiones le function `numeral` es le plus utile, le alteres nos hodie non besonia. Si le file `numerales.py` es in le mesme directorio ubi nos initia le interprete, nos pote importar lo como un modulo:
+Nos nunc pote utilisar file `numerales.py` in le interprete de Python. Ex le functiones in file `numerales.py` nos vole usar le function `numeral`. Si le file `numerales.py` es in le mesme directorio ubi nos initia le interprete, nos pote importar lo como un modulo:
 
 ```
 > from numerales import numeral
@@ -10,7 +10,7 @@ Nos nunc pote utilisar file `numerales.py` in le interprete de Python. Ex functi
 'duo milles vinti'
 ```
 
-Nos construe le prime 50 mille numeros e salva los in file `numeros.txt`:
+Nos construe le prime 50 milles numeros e salva los in file `numeros.txt`:
 
 ```
 lines = []
@@ -40,7 +40,7 @@ Le componente `entry1` ha su loco in supra de fenestra `(side=TOP)`, le componen
 \begin{figure}[]
 \begin{center}
 \includegraphics{figures/tk-text-1.png}
-\caption{Le campo pro texto.}
+\caption{Duo differente campos pro texto e un barra a rolar.}
 \label{tk-text}
 \end{center}
 \end{figure}
@@ -80,7 +80,7 @@ entry1.focus ()
 
 Nos defini le function `return_pressed` a vocar le function `find_words`, Le function que responde a function `bind` ha le evento como prime argumento. Hic nos tamen non usa le argumento `event`. Le texto que nos cerca, es in campo `entry1`. Le resultatos de cerca nos monstra in componente `text1`.
 
-Le componente de typo `Text` es un campo de texto de plure lineas, e il existe differente formas a exprimer su indice, per exemplo `"linea.columna"` o `INSERT` o `END`. Le indice `"1.0"` es le prime columna de prime linea.
+Le componente de typo `Text` es un campo de texto de plure lineas, e il existe differente formas a exprimer su indice, per exemplo `"linea.columna"` o `INSERT` (puncto de insertion) o `END` (fin del texto). Le indice `"1.0"` es le prime columna de prime linea. (Le indices de linea comencia per 1, le indices de columna per 0.)
 
 Nos selige le texto in campo `entry1`. Talmente illo dispare quando nos comencia scriber le sequente parola a cercar.
 
@@ -115,7 +115,7 @@ def find_words (word):
 
 ## Argumentos del programma
 
-Quando nos initia le programma, Python ha le argumentos in lista `sys.argv`. Le prime elemento `sys.argv[0]` es sempre le nomine de programma. Nos usa le altere argumentos a leger le textos in lista `lines`.
+Quando nos initia le programma, Python ha le argumentos in lista `sys.argv`. Le prime elemento `sys.argv [0]` es sempre le nomine de programma. Nos usa le altere argumentos a leger le textos in lista `lines`.
 
 ```
 import sys
@@ -142,7 +142,7 @@ In toto 50000 lineas
 
 ## Coloration de resultatos
 
-Il es possibile a transformar le aspecto de partes individual del texto in componente `Texto`. Un tal parte ha le nomine *etiquetta* (anglese *tag*).
+Il es possibile a transformar le aspecto de partes individual del texto in componente `Text`. Un tal parte ha le nomine *etiquetta* (in anglese: *tag*).
 
 Nos defini un forma de etiquetta `"gray"`.
 
@@ -151,7 +151,7 @@ text1.tag_configure (
   "gray", foreground="#ffffff", background="#444444")
 ```
 
-In le function `return_pressed` nos ha le variabiles `word` e `result` que nos besinia a colorar le resultatos per function `highlight`:
+In le function `return_pressed` nos ha le variabiles `word` e `result` que nos besonia a colorar le resultatos per function `highlight`:
 
 ```
 def return_pressed (event):
@@ -311,7 +311,7 @@ print ("Wrote", csvfile)
 
 ## Modulo `matplotlib`
 
-Pro pinger un pictura, nos lege le resultatos ex file CSV.
+Post que nos ha salvate le resultatos in file CSV, nos lege illos pro monstrar un graphico. 
 
 ```
 import csv
@@ -331,7 +331,7 @@ total = sum (amount)
 ratios = [n / total for n in amount]
 ```
 
-Nos usa modulo `matplotlib` pro pinger le pictura. Le resultato nos vide in figura \ref{freq-collection}.
+Nos usa modulo `matplotlib` pro facer le graphico. Le resultato nos vide in figura \ref{freq-collection}.
 
 \begin{figure}[]
 \begin{center}
@@ -347,19 +347,21 @@ import matplotlib.pyplot as plt
 
 f = plt.figure (figsize=(5.66,2.5))
 bars = plt.bar (
-  x=ltrs, height=ratios, color=(1,1,1,0), linewidth=1.0, 
+  x=ltrs, height=ratios, color=(1,1,1,1), linewidth=1.0, 
   edgecolor='black')
 
+bottom, top = plt.ylim ()
+plt.ylim (top=top + 0.01)
 for rect, label in zip (bars, ltrs):
-  height = rect.get_height ()
-  x = rect.get_x() + rect.get_width() / 2
-  y = height
-  plt.text (x,y, label, ha='center', va='bottom')
+  height = rect.get_height()
+  x = rect.get_x () + rect.get_width () / 2
+  y = height + 0.0015
+  plt.text (x, y, label, ha='center', va='bottom')
 
 plt.tick_params (bottom=False,labelbottom=False)
-plt.gca().spines['right'].set_visible (False)
-plt.gca().spines['top'].set_visible (False)
-f.savefig ("freq-collection-1.pdf", dpi=96, bbox_inches='tight')
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['top'].set_visible(False)
+f.savefig ("freq-collection-1.pdf", bbox_inches='tight')
 plt.show ()
 ```
 

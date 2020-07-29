@@ -111,7 +111,7 @@ Nos anque definiva un methodo `pair`, que retorna a nos un 2-tupla con le coordi
 
 ## Le classes `Line` e `Polygon`
 
-Nos defini un objecto de classe `Line` per duo punctos `p1` et `p2`. Un objecto de class `Polygon` ha un attributo `ps` que es un lista de punctos.
+Nos defini un objecto de classe `Line` per duo punctos `p1` et `p2`. Un objecto de classe `Polygon` ha un attributo `ps` que es un lista de punctos.
 
 ```
 class Line: 
@@ -157,7 +157,7 @@ ct.set_source_rgb (1.00, 1.00, 1.00)
 ct.fill()
 ```
 
-Nos defini functiones `draw_rect`, `draw_line` e `draw_polygon` a pinger un rectangulo, un linea e un polygono. Nos nunc besonia le methodos `move_to`, `line_to` e `close_path` de nostre objecto `ct`.
+Nos defini functiones `draw_rect`, `draw_line`, e `draw_polygon` a pinger un rectangulo, un linea, e un polygono. Nos nunc besonia le methodos `move_to`, `line_to` e `close_path` de nostre objecto `ct`.
 
 ```
 def draw_rect (p1,p2):
@@ -210,8 +210,6 @@ import subprocess
 filename = "armature-1.pdf"
 subprocess.Popen (["mupdf " + filename],shell=True)
 ```
-
-
 
 ## Intersection de duo lineas
 

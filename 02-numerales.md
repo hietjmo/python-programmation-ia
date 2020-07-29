@@ -1,6 +1,6 @@
 # Programma de numerales
 
-In iste capitulo nos continua apprender le linguage Python per le exemplos de numerales de Interlingua.
+In iste capitulo nos continua apprender le linguage Python per le exemplos de numerales de interlingua.
 
 
 ## Le function `print`
@@ -336,7 +336,7 @@ Le resultatos es
 
 ## Methodo `str.join`
 
-Sequentias de characteres ha le methodo `join`, que adjunge le elementos de su argumento con le instantia de classe `str`. Per exemplo, `" ".join (["A","B","C"])` adjunge le elementos `"A"`, `"B"` et `"C"` con le sequentia `" "`.
+Sequentias de characteres ha le methodo `join`, que adjunge le elementos de su argumento con le instantia de classe `str`. Per exemplo, `" ".join (["A","B","C"])` adjunge le elementos `"A"`, `"B"`, et `"C"` con le sequentia `" "`.
 
 
 ```
@@ -358,6 +358,8 @@ Nos ha usate le componente `Label` a monstrar un texto in un fenestra. Nunc nos 
 
 Ambes ha un lista de proprietates que nos pote usar a cambiar le aspecto de elemento: su parente, color, bordo, largessa, typo de litteras, et cetera. Nos selige nulle bordo, texto nigre sur fundo blanc. Nomines de numerales es longe: nos selige largessa 60 characteres (figura \ref{entry-py}).
 
+Un `Entry` anque besonia un variabile `StringVar` pro le texto.
+
 \begin{figure}[]
 \begin{center}
 \includegraphics{figures/entry-py.png}
@@ -376,14 +378,16 @@ entry1 = Entry (root, textvariable=svar, bd=0, width=60)
 label1 = Label (root, bg="white", fg="black", width=60)
 entry1.pack ()
 label1.pack ()
-svar.trace ("w", lambda name, index, mode, sv=svar: callback 
-  (svar,label1))
+svar.trace (
+  "w", 
+  lambda name, index, mode, sv=svar: callback (svar,label1))
 entry1.focus_set ()
 root.mainloop ()  
- 
 ```
 
 Hic nos ha prestate un function `callback`, que responde al cambios de texto. Le texto es in variabile `svar` de classe `StringVar`. Nos lege le texto per methodo `get`.
+
+Le nomines `root`, `svar`, `entry1`, e `label1` es le instantias de su classe correspondente, id es, le objectos actual.
 
 Nos valida le entrata per scriber solmente le numeros que nos collige ex texto.
 
